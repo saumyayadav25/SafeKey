@@ -12,8 +12,8 @@
     --dk-violet: hsl(268, 91%, 8%);
     --lt-violet: hsl(268, 23%, 27%);
     --lt-violet2: hsla(241, 26%, 37%, 0.737);
-    --vb-violet: hsl(325, 72%, 38%);
-    --vb-violet2: hsl(328, 72%, 38%);
+    --vb-violet: hsl(249, 52%, 28%);
+    --vb-violet2: hsl(251, 72%, 38%);
     --vb-yellow: hsl(52, 100%, 50%);
     --pl-white: hsl(0, 0%, 100%);
     --vb-cyan: hsl(176, 100%, 44%);
@@ -22,6 +22,7 @@
 }
 
 body {
+    padding-top: 4.5rem;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -30,6 +31,56 @@ body {
     justify-content: center;
     background: linear-gradient(231deg, rgb(7, 5, 31) 0%, rgba(36, 28, 79, 1) 50%, rgb(12, 2, 44) 100%);
 }
+
+.navbar {
+  width: 100%;
+  background-color: var(--dk-violet);
+  padding: 1rem 4rem; 
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* container inside navbar */
+.navbar .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px; 
+  margin: 0 auto; 
+}
+
+/* logo */
+.navbar .logo {
+  color: var(--vb-yellow);
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* nav links on right */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li {
+  display: inline;
+}
+.nav-links a {
+  color: var(--pl-white);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+.nav-links a:hover {
+  color: var(--vb-yellow);
+}
+
 .container {
     width: 90%;
     max-width: 450px;
@@ -233,3 +284,62 @@ h1 {
     box-shadow: 0px 0px 25px 5px rgba(255, 229, 61, 0.80);
 }
 
+/* Saved passwords section */
+#saved-list .password-item {
+  background-color: var(--dk-violet);
+  border-radius: 0.75rem;
+  border-bottom: 0.25rem solid var(--lt-violet2);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--pl-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+#saved-list input {
+  background: transparent;
+  border: none;
+  color: var(--vb-yellow);
+  font-weight: 600;
+  font-size: 1.1rem;
+  width: 150px;
+  text-align: center;
+}
+#saved-list button {
+  background: var(--vb-violet);
+  border: none;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: var(--vb-yellow);
+  font-weight: 600;
+}
+.save-section {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.save-section input {
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+  border: none;
+}
+.save-section button {
+  background: var(--vb-violet);
+  color: var(--vb-yellow);
+  font-weight: 600;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+/* Empty state */
+.empty-state {
+  text-align: center;
+  color: var(--pl-white);
+  opacity: 0.7;
+  margin-top: 2rem;
+  font-size: 1.2rem;
+}

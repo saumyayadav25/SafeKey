@@ -13,7 +13,23 @@
 </head>
 
 <body>
-    <div class="container">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">SafeKey</a>
+            <ul class="nav-links">
+            <li>
+                <a href="#generate-pass" id="nav-generate">Generate Password</a>
+            </li>
+            <li>
+                <a href="#saved-passwords" id="nav-saved">Saved</a>
+            </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Generate password-->
+    <div class="container" id="generate-pass">
         <h1>Password Generator</h1>
 
         <div class="display-container">
@@ -54,10 +70,20 @@
                 <p>Strength</p>
                 <div class="indicator" data-indicator></div>
             </div>
-            <!-- generate password-->
+            <!-- Generate password-->
             <button class="generateButton">Generate Password</button>
+            <!-- Save password-->
+            <div class="save-section">
+                <input type="text" id="titleInput" placeholder="Enter title for password">
+                <button id="saveBtn">Save Password</button>
+            </div>
         </div>
+    </div>
 
+    <!-- Saved Passwords Section -->
+    <div class="container" id="saved-passwords" style="display:none;">
+        <h1>Saved Passwords</h1>
+        <div id="saved-list"></div>
     </div>
 
     <script src="script.js"></script>

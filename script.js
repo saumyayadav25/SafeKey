@@ -11,6 +11,8 @@ const indicator = document.querySelector("[data-indicator]");
 const generateBtn = document.querySelector(".generateButton");
 const allCheckBox = document.querySelectorAll("input[type=checkbox]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
+const saveBtn = document.getElementById("saveBtn");
+const titleInput = document.getElementById("titleInput");
 
 //initially
 let password = "";
@@ -201,4 +203,71 @@ generateBtn.addEventListener('click', () => {
 
     //calculate strength of password
     calcStrength();
+});
+
+
+// Save passwords locally
+const savePassword = () => {
+  const title = titleInput.value.trim();
+  const pwd = passwordDisplay.value.trim();
+  if (!title || !pwd) return alert("Please enter a title and generate password first");
+
+  let data = JSON.parse(localStorage.getItem("savedPasswords")) || [];
+  data.push({ title, password: pwd });
+  localStorage.setItem("savedPasswords", JSON.stringify(data));
+
+  titleInput.value = "";
+  alert("Password saved!");
+};
+
+saveBtn.addEventListener("click", savePassword);
+
+// Render saved passwords
+const renderSaved = () => {
+  const list = document.getElementById("saved-list");
+  list.innerHTML = "";
+  let data = JSON.parse(localStorage.getItem("savedPasswords")) || [];
+
+  if (data.length === 0) {
+    // 🔴 show empty state if none
+    list.innerHTML = `<p class="empty-state">No saved passwords yet!</p>`;
+    return;
+  }
+
+  data.forEach((item, index) => {
+    list.innerHTML += `
+      <div class="password-item">
+        <span>${item.title}</span>
+        <input type="password" value="${item.password}" id="pwd-${index}" readonly>
+        <button onclick="togglePassword(${index})">👁️</button>
+        <button onclick="deletePassword(${index})">🗑️</button>
+      </div>
+    `;
+  });
+};
+
+// Toggle visibility
+window.togglePassword = (i) => {
+  let input = document.getElementById(`pwd-${i}`);
+  input.type = input.type === "password" ? "text" : "password";
+};
+
+// Delete password
+window.deletePassword = (i) => {
+  let data = JSON.parse(localStorage.getItem("savedPasswords")) || [];
+  data.splice(i, 1);
+  localStorage.setItem("savedPasswords", JSON.stringify(data));
+  renderSaved();
+};
+
+
+// Navbar navigation using js
+document.getElementById("nav-generate").addEventListener("click", () => {
+  document.getElementById("generate-pass").style.display = "block";
+  document.getElementById("saved-passwords").style.display = "none";
+});
+document.getElementById("nav-saved").addEventListener("click", () => {
+  document.getElementById("generate-pass").style.display = "none";
+  document.getElementById("saved-passwords").style.display = "block";
+  renderSaved();
 });
